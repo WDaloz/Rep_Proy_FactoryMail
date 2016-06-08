@@ -8,7 +8,7 @@ import com.daloz.factorymail.config.enums.EmailType;
 import com.daloz.factorymail.core.IMailManager;
 import com.daloz.factorymail.factoryservice.FactoryMailManager;
 import com.daloz.factorymail.objects.FileProcessResponse;
-import com.daloz.factorymail.objects.Mail;
+import com.daloz.factorymail.objects.EMail;
 
 public class TestGMail
 {
@@ -23,11 +23,14 @@ public class TestGMail
 	@Test
 	public void test()
 	{
-		Mail mail = new Mail();
-		mail.setFrom("cristhianp00@gmail.com");
+		EMail mail = new EMail();
+		mail.setFrom("medikidsm@gmail.com");
+		mail.setPassword("ggronxubhzbcdgfg");
 		mail.setSubject("Titulo");
 		mail.setText("Cuerpo del texto");
-		mail.setRecipient("cristhianp00@gmail.com");
+		
+		mail.setRecipient("cristhianp00@gmail.com", "soharu666@gmail.com");
+		mail.setHiddenRecipient("sgirard2080@gmail.com");
 		
 		FileProcessResponse fr = iMailManager.sendMail(mail);
 	}
