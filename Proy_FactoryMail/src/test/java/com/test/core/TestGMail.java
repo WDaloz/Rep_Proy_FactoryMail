@@ -27,12 +27,15 @@ public class TestGMail
 		mail.setFrom("medikidsm@gmail.com");
 		mail.setPassword("ggronxubhzbcdgfg");
 		mail.setSubject("Titulo");
-		mail.setText("Cuerpo del texto");
+		mail.setTextHtml("<h1>body gmail object</h1><p>it's a simple test</p>");
 		
-		mail.setRecipient("cristhianp00@gmail.com", "soharu666@gmail.com");
-		mail.setHiddenRecipient("sgirard2080@gmail.com");
+		mail.setRecipientTO("cristhianp00@gmail.com");
+		mail.setHiddenRecipientBCC("sgirard2080@gmail.com");
+		mail.setRecipientCC("soharu666@gmail.com");
 		
 		FileProcessResponse fr = iMailManager.sendMail(mail);
+		
+		System.out.println(fr.getReport());
 	}
 
 }

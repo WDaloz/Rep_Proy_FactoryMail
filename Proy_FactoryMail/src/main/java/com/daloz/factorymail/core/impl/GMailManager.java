@@ -1,5 +1,7 @@
 package com.daloz.factorymail.core.impl;
 
+import static com.daloz.factorymail.config.enums.ProcessMessages.*;
+
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -14,14 +16,18 @@ import com.daloz.factorymail.core.IMailManager;
 import com.daloz.factorymail.objects.FileProcessResponse;
 import com.daloz.factorymail.objects.EMail;
 
+import static com.daloz.factorymail.config.properties.PropertiesHelper.*;
+import static com.daloz.factorymail.config.enums.EmailType.*;
+
 public class GMailManager implements IMailManager
 {
 	private static GMailManager instance;
 	private Properties properties;
-
+	
 	private GMailManager()
 	{
-		initProperties();
+		//Inicilizar las propiedades.
+		properties = getProperties(GMAIL.getProperties());
 	}
 
 	public static GMailManager getInstance()
@@ -37,8 +43,11 @@ public class GMailManager implements IMailManager
 	@Override
 	public FileProcessResponse sendMail(EMail email)
 	{
-		FileProcessResponse fResponse = new FileProcessResponse();
+		FileProcessResponse fPResponse = new FileProcessResponse();
+		
+		Long startTime = System.nanoTime();
 
+	
 		Session session = Session.getInstance(properties, new Authenticator()
 		{
 			@Override
@@ -52,43 +61,42 @@ public class GMailManager implements IMailManager
 
 		try
 		{
-			message.setRecipients(RecipientType.TO, email.getRecipient());
-			message.setRecipients(RecipientType.BCC, email.getHiddenRecipient());
+			
 
+			message.setRecipients(RecipientType.TO, email.getRecipientTO());
+			message.setRecipients(RecipientType.BCC, email.getHiddenRecipientBCC());
+			message.setRecipients(RecipientType.CC, email.getRecipientCC());
+			
 			message.setSubject(email.getSubject());
-			message.setText(email.getText());
+
+			if(email.getHtml())
+			{
+				message.setContent(email.getText(), "text/html");
+			}
+			else
+			{
+				message.setText(email.getText());
+			}
+
 
 			Transport.send(message);
 
-		} catch (MessagingException e)
+			Long endTime = System.nanoTime();
+			
+			fPResponse.generatingMappingSatisfactory(EMAIL_SENT_MSG.getMessage(), startTime, endTime);
+
+		} 
+		catch (MessagingException e)
 		{
+			fPResponse.generatingMappingErrors(e);
 			e.printStackTrace();
 		}
+		
 
-		return fResponse;
+		return fPResponse;
 	}
+	
 
-	private void initProperties()
-	{
-		properties = new Properties();
 
-		// Esta propiedad representa el host que hace de servidor de correo.
-		// En este caso para el servidor de gmail.
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-
-		// TLS si esta disponible en el servidor se activara.
-		// Sirve para el envio de informacion encriptada.
-		properties.put("mail.smtp.starttls.enable", "true");
-
-		// Puerto de Gmail en este caso para enviar correos
-		properties.put("mail.smtp.port", "587");
-
-		// Establecer cuenta de correo a usar como emisor.
-		// properties.put("mail.smtp.mail.sender", email.getFrom());
-
-		// Establece la propiedad que si requiere o no auntenticacion
-		// En este caso si se requiere
-		properties.put("mail.smtp.auth", "true");
-	}
 
 }

@@ -5,28 +5,29 @@ import javax.mail.internet.InternetAddress;
 
 public class EMail
 {
+	private Boolean html;
 	private String from, subject, text, password;
-	private InternetAddress[] recipient, hiddenRecipient;
+	private InternetAddress[] recipientTO, hiddenRecipientBCC, recipientCC;
 
 	public String getFrom()
 	{
 		return from;
 	}
 
-	public InternetAddress[] getHiddenRecipient()
+	public InternetAddress[] getHiddenRecipientBCC()
 	{
-		return hiddenRecipient;
+		return hiddenRecipientBCC;
 	}
 
-	public void setHiddenRecipient(String... hiddenRecipient)
+	public void setHiddenRecipientBCC(String... hiddenRecipientBCC)
 	{
-		this.hiddenRecipient = new InternetAddress[hiddenRecipient.length];
+		this.hiddenRecipientBCC = new InternetAddress[hiddenRecipientBCC.length];
 
-		for (int i = 0; i < hiddenRecipient.length; i++)
+		for (int i = 0; i < hiddenRecipientBCC.length; i++)
 		{
 			try
 			{
-				this.hiddenRecipient[i] = new InternetAddress(hiddenRecipient[i]);
+				this.hiddenRecipientBCC[i] = new InternetAddress(hiddenRecipientBCC[i]);
 			} 
 			catch (AddressException e)
 			{
@@ -58,7 +59,14 @@ public class EMail
 	public void setText(String text)
 	{
 		this.text = text;
+		this.html = false;
 	}
+	public void setTextHtml(String text)
+	{
+		this.text = text;
+		this.html =  true;
+	}
+	
 
 	public String getPassword()
 	{
@@ -70,25 +78,52 @@ public class EMail
 		this.password = password;
 	}
 
-	public InternetAddress[] getRecipient()
+	public InternetAddress[] getRecipientTO()
 	{
-		return recipient;
+		return recipientTO;
 	}
 
-	public void setRecipient(String... recipient)
+	public void setRecipientTO(String... recipientTO)
 	{
-		this.recipient = new InternetAddress[recipient.length];
+		this.recipientTO = new InternetAddress[recipientTO.length];
 
-		for (int i = 0; i < recipient.length; i++)
+		for (int i = 0; i < recipientTO.length; i++)
 		{
 			try
 			{
-				this.recipient[i] = new InternetAddress(recipient[i]);
+				this.recipientTO[i] = new InternetAddress(recipientTO[i]);
 			} catch (AddressException e)
 			{
 				e.printStackTrace();
 			}
 		}
 	}
+	
+	public Boolean getHtml()
+	{
+		return html;
+	}
 
+	public InternetAddress[] getRecipientCC()
+	{
+		return recipientCC;
+	}
+
+	public void setRecipientCC(String... recipientCC)
+	{
+		this.recipientCC = new InternetAddress[recipientCC.length];
+
+		for (int i = 0; i < recipientCC.length; i++)
+		{
+			try
+			{
+				this.recipientCC[i] = new InternetAddress(recipientCC[i]);
+			} 
+			catch (AddressException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+ 
 }
