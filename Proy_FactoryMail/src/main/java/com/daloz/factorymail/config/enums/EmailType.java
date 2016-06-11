@@ -2,7 +2,7 @@ package com.daloz.factorymail.config.enums;
 
 public enum EmailType
 {
-	GMAIL("gmail.properties"), OUTLOOK("");
+	GMAIL("gmail.properties"), OUTLOOK("outlook.properties");
 	
 	private String properties;
 	
