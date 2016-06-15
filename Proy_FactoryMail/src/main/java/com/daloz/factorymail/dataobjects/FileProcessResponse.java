@@ -1,4 +1,4 @@
-package com.daloz.factorymail.objects;
+package com.daloz.factorymail.dataobjects;
 
 
 public class FileProcessResponse

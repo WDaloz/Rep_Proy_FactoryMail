@@ -12,53 +12,63 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
 
+import com.daloz.factorymail.config.enums.EmailType;
 import com.daloz.factorymail.core.IMailManager;
+import com.daloz.factorymail.dataobjects.Email;
+import com.daloz.factorymail.dataobjects.FileProcessResponse;
 import com.daloz.factorymail.exception.MessageNullException;
 import com.daloz.factorymail.exception.RecipientNullException;
-import com.daloz.factorymail.objects.FileProcessResponse;
-import com.daloz.factorymail.objects.EMail;
 
 import static com.daloz.factorymail.config.properties.PropertiesHelper.*;
 import static com.daloz.factorymail.config.enums.EmailType.*;
 
-public class GMailManager implements IMailManager
+public class GenericMailManager implements IMailManager
 {
-	private static GMailManager instance;
+	private static GenericMailManager instanceGmail, instanceOutlook;
 	private Properties properties;
 
-	private GMailManager()
+	private GenericMailManager(String path)
 	{
 		// Inicilizar las propiedades.
-		properties = getProperties(GMAIL.getProperties());
+		properties = getProperties(path);
 	}
 
-	public static GMailManager getInstance()
+	public static GenericMailManager getInstance(EmailType emailType)
 	{
-		if (instance == null)
+		if (emailType == GMAIL)
 		{
-			instance = new GMailManager();
+			if (instanceGmail == null)
+			{
+				instanceGmail = new GenericMailManager(emailType.getPath());
+			}
+
+			return instanceGmail;
 		}
 
-		return instance;
+		if (instanceOutlook == null)
+		{
+			instanceOutlook = new GenericMailManager(emailType.getPath());
+		}
+
+		return instanceOutlook;
+
 	}
 
 	@Override
-	public FileProcessResponse sendMail(EMail email)
+	public FileProcessResponse sendMail(Email email)
 	{
 		FileProcessResponse fPResponse = new FileProcessResponse();
 
 		try
 		{
 
-			if (
-				email.getHiddenRecipientBCC() == null &&
-				email.getRecipientCC() == null && 
-				email.getRecipientTO() == null)
+			if (email.getHiddenRecipientBCC() == null && email.getRecipientCC() == null
+					&& email.getRecipientTO() == null)
 			{
 				throw new RecipientNullException();
 			}
-			
-			if(email.getText() == null)
+
+			if (email.getText() == null)
 			{
 				throw new MessageNullException();
 			}
@@ -75,7 +85,6 @@ public class GMailManager implements IMailManager
 			});
 
 			MimeMessage message = new MimeMessage(session);
-
 
 			message.setRecipients(RecipientType.TO, email.getRecipientTO());
 			message.setRecipients(RecipientType.BCC, email.getHiddenRecipientBCC());

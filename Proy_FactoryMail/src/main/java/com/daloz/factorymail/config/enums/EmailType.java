@@ -4,15 +4,15 @@ public enum EmailType
 {
 	GMAIL("gmail.properties"), OUTLOOK("outlook.properties");
 	
-	private String properties;
+	private String getPath;
 	
-	private EmailType(String properties)
+	private EmailType(String path)
 	{
-		this.properties = properties;
+		this.getPath = path;
 	}
 	
-	public String getProperties()
+	public String getPath()
 	{
-		return properties;
+		return getPath;
 	}
 }

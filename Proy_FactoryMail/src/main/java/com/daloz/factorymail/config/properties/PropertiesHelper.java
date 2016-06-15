@@ -1,9 +1,7 @@
 package com.daloz.factorymail.config.properties;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Properties;
 
 public class PropertiesHelper
@@ -14,7 +12,9 @@ public class PropertiesHelper
 		
 		try
 		{
-			properties.load(new InputStreamReader(new FileInputStream(getPackage().concat(name))));
+			
+			properties.load(PropertiesHelper.class.getClassLoader().getResourceAsStream
+					("com/daloz/factorymail/config/properties/"+name));
 		} 
 		catch (FileNotFoundException e)
 		{

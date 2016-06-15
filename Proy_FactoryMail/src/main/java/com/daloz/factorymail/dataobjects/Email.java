@@ -1,9 +1,9 @@
-package com.daloz.factorymail.objects;
+package com.daloz.factorymail.dataobjects;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-public class EMail
+public class Email
 {
 	private Boolean html;
 	private String from, subject, text, password;

@@ -1,0 +1,11 @@
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\util\Log4jU.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\config\enums\ProcessMessages.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\core\IMailManager.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\exception\MessageNullException.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\config\properties\PropertiesHelper.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\factoryservice\FactoryMailManager.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\objects\Email.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\exception\RecipientNullException.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\config\enums\EmailType.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\objects\FileProcessResponse.java
+D:\GIT_Repositorios\Rep_Proy_FactoryMail\Proy_FactoryMail\src\main\java\com\daloz\factorymail\core\impl\GenericMailManager.java

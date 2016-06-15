@@ -1,9 +1,9 @@
 package com.daloz.factorymail.core;
 
-import com.daloz.factorymail.objects.FileProcessResponse;
-import com.daloz.factorymail.objects.EMail;
+import com.daloz.factorymail.dataobjects.Email;
+import com.daloz.factorymail.dataobjects.FileProcessResponse;
 
 public interface IMailManager
 {
-	FileProcessResponse sendMail(EMail mail);
+	FileProcessResponse sendMail(Email mail);
 }
