@@ -27,9 +27,4 @@ public class PropertiesHelper
 		
 		return properties;
 	}
-	
-	private static String getPackage()
-	{
-		return "src/main/java/"+PropertiesHelper.class.getPackage().getName().toString().replace(".", "/").concat("/");
-	}
 }

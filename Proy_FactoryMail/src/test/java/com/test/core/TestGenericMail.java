@@ -26,7 +26,7 @@ public class TestGenericMail
 		mail.setSubject("Titulo");
 		mail.setTextHtml("<h1>body gmail object</h1><p>it's a simple test</p>");
 
-		mail.setRecipientTO("joelsulcagamboag1@gmail.com");
+		mail.setRecipientTO("cristhianp00@gmail.com");
 	
 
 		FileProcessResponse fr = iMailManager.sendMail(mail);

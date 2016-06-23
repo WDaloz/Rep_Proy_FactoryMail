@@ -55,7 +55,7 @@ public class GenericMailManager implements IMailManager
 	}
 
 	@Override
-	public FileProcessResponse sendMail(Email email)
+	public FileProcessResponse sendMail(final Email email)
 	{
 		FileProcessResponse fPResponse = new FileProcessResponse();
 
