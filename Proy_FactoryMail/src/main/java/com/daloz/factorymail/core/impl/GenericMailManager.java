@@ -25,7 +25,7 @@ import static com.daloz.factorymail.config.enums.EmailType.*;
 public class GenericMailManager implements IMailManager
 {
 	private static GenericMailManager instanceGmail, instanceOutlook;
-	private Properties properties;
+	private static Properties properties;
 
 	private GenericMailManager(String path)
 	{
@@ -33,13 +33,18 @@ public class GenericMailManager implements IMailManager
 		properties = getProperties(path);
 	}
 
-	public static GenericMailManager getInstance(EmailType emailType)
+	public static GenericMailManager getInstance(EmailType emailType, Integer port)
 	{
 		if (emailType == GMAIL)
 		{
 			if (instanceGmail == null)
 			{
 				instanceGmail = new GenericMailManager(emailType.getPath());
+				if(port != null)
+				{
+					System.out.println("Llego para establecer puerto: "+port);
+					properties.setProperty("mail.smtp.port", port.toString());
+				}
 			}
 
 			return instanceGmail;
@@ -51,7 +56,6 @@ public class GenericMailManager implements IMailManager
 		}
 
 		return instanceOutlook;
-
 	}
 
 	@Override
@@ -107,6 +111,7 @@ public class GenericMailManager implements IMailManager
 
 			fPResponse.generatingMappingSatisfactory(EMAIL_SENT_MSG.getMessage(), startTime, endTime);
 
+			System.out.println("Enviado desd el puerto: "+properties.getProperty("mail.smtp.port"));
 		}
 		catch (MessagingException | RecipientNullException | MessageNullException e)
 		{
@@ -115,6 +120,11 @@ public class GenericMailManager implements IMailManager
 		}
 
 		return fPResponse;
+	}
+	
+	public void setProperties(Properties properties)
+	{
+		GenericMailManager.properties = properties;
 	}
 
 }

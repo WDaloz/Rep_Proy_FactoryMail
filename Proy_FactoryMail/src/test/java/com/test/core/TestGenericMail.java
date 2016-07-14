@@ -18,7 +18,7 @@ public class TestGenericMail
 	@Test
 	public void testGmail()
 	{
-		iMailManager = FactoryMailManager.getGenericMailManager(EmailType.GMAIL);
+		iMailManager = FactoryMailManager.getGenericMailManager(EmailType.GMAIL, 25);
 
 		Email mail = new Email();
 		mail.setFrom("medikidsm@gmail.com");
@@ -38,7 +38,7 @@ public class TestGenericMail
 	@Test
 	public void testOutlook()
 	{
-		iMailManager = FactoryMailManager.getGenericMailManager(EmailType.OUTLOOK);
+		iMailManager = FactoryMailManager.getGenericMailManager(EmailType.OUTLOOK, null);
 
 		Email mail = new Email();
 		mail.setFrom("medikidsm@gmail.com");

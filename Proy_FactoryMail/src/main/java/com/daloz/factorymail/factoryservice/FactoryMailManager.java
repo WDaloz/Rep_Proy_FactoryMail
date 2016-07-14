@@ -6,8 +6,8 @@ import com.daloz.factorymail.core.impl.GenericMailManager;
 
 public abstract class FactoryMailManager
 {
-	public static IMailManager getGenericMailManager(EmailType emailType)
+	public static IMailManager getGenericMailManager(EmailType emailType, Integer port)
 	{
-		return GenericMailManager.getInstance(emailType);
+		return GenericMailManager.getInstance(emailType, port);
 	}
 }
